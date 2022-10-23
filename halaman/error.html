@@ -1,0 +1,19 @@
+<?php
+    include "kepala.html";
+?>
+<div class="isi">
+    <div class="judul">
+        <h1>Error</h1><?php
+            if($_GET["err"]=="koneksi")
+                echo("koneksi rusak:". $_GET["data"]);
+            else if($_GET["err"]=="user")
+                echo("user tidak ada");
+            else
+                echo("error tidak jelas");
+        ?>
+        <br />
+        <a href=../index.html>kembali</a>
+    </div>
+</div>
+<?php include "kaki.html";
+?>
