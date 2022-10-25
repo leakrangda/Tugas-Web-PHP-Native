@@ -9,33 +9,33 @@
     </head>
     <body>
         <div class= "container-fluid bg-dark text-white text-center">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-md-12">
                     <h1 class="text-center">Menu</h1>
                     <h3>Selamat Datang <?php echo($_GET['user']); ?></h3>
                 </div>
             </div>
-            <div class="row">
+            <div class="row justify-content-center">
 <?php if($_GET['level']=='1')
     include "menuAdmin.html";
 ?>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href=viewUser.html><img class="rounded-circle float-right" width="20%" src="../gambar/ilham.png" /></a>
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <a href=viewUser.html><img class="rounded-circle float-right" width="50%" src="../gambar/ilham.png" /></a>
                     <p>Lihat User</p>
                 </div>
-                <div class="col-md-6">
-                    <a href=viewTransaksi.html><img class="rounded-circle float-left" width="20%" src="../gambar/ilham.png"  /></a>
+                <div class="col-md-2">
+                    <a href=viewTransaksi.html><img class="rounded-circle float-left" width="50%" src="../gambar/ilham.png"  /></a>
                     <p>Lihat Transaki</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href=viewKategori.html><img class="rounded-circle float-right" width="20%" src="../gambar/ilham.png" /></a>
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <a href=viewKategori.html><img class="rounded-circle float-right" width="50%" src="../gambar/ilham.png" /></a>
                     <p>Lihat Kategori</p>
                 </div>
-                <div class="col-md-6">
-                    <a href=viewBarang.html><img class="rounded-circle float-left" width="20%" src="../gambar/ilham.png" /></a>
+                <div class="col-md-2">
+                    <a href=viewBarang.html><img class="rounded-circle float-left" width="50%" src="../gambar/ilham.png" /></a>
                     <p>Lihat Barang</p>
                 </div>
             </div>

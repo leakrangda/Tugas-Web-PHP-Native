@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pemrograman 3: View User</title>
+        <title>Pemrograman 3: View Barang</title>
         <link rel="stylesheet/css" link="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="../styling/css/pemrograman3.css" />
@@ -10,27 +10,31 @@
     <body class="vertical">
         <div class="container-fluid bg-dark text-white text-center vertical">
             <div class="container">
-                <h2>View User</h2>
+                <h2>View Barang</h2>
             </div>
             <div class="container max-width:50% m-5 ">
                 <div class="row border m-2">
-                    <div class="col-2">no</div>
-                    <div class="col-3">nama</div>
-                    <div class="col-2">level</div>
-                    <div class="col-2">status</div>
-                    <div class="col-3">kontrol</div>
+                    <div class="col-1">no</div>
+                    <div class="col-3">nama barang</div>
+                    <div class="col-2">kode barang</div>
+                    <div class="col-2">jumlah</div>
+                    <div class="col-2">kategori</div>
+                    <div class="col-2">kontrol</div>
                 </div>
 <?php include "../backend/koneksi.php"; ?>
 <?php if($koneksi){
-                    $query = mysqli_query($koneksi, "select id_user, nama, level, status from user");
+                    $query = mysqli_query($koneksi, 
+                        "select id_barang, id_kategori, nama_barang, kode_barang, qty, nama_kategori 
+                            from barang a inner join kategori b on a.kategori_id = b.id_kategori");
                     $counter = 1;
                     while($data = mysqli_fetch_assoc($query)){ ?>
                 <div class="row border m-2">
-                    <div class="col-2"><?php echo($counter); ?></div>
-                    <div class="col-3"><?php echo($data["nama"]); ?></div>
-                    <div class="col-2"><?php echo($data["level"]); ?></div>
-                    <div class="col-2"><?php echo($data["status"]); ?></div>
-                    <div class="col-3">
+                    <div class="col-1"><?php echo($counter); ?></div>
+                    <div class="col-3"><?php echo($data["nama_barang"]); ?></div>
+                    <div class="col-2"><?php echo($data["kode_barang"]); ?></div>
+                    <div class="col-2"><?php echo($data["qty"]); ?></div>
+                    <div class="col-2"><?php echo($data["nama_kategori"]); ?></div>
+                    <div class="col-2">
                         <a href="../backend/editUser.php?user_id=<?php $data['id_user'];?>">Edit</a></td>
                         <a href="../backend/deleteUser.php?user_id=<?php $data['id_user'];?>">delete</a></td>
                     </div>

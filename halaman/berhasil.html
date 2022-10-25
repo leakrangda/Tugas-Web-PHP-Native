@@ -1,0 +1,23 @@
+<?php
+    include "kepala.html";
+?>
+<div class="isi">
+    <div class="judul">
+        <h1>Selamat!!!</h1><?php
+            if($_GET["tipe"]=="kategori")
+                echo("Yey!! Berhasil menambahkan ". $_GET["tipe"]);
+            else if($_GET["tipe"]=="user")
+                echo("Mantul!! Berhasil menambahkan User");
+            else if($_GET["tipe"]=="barang")
+                echo("GG!! Berhasil menambahkan Barang");
+            else if($_GET["tipe"]=="transaksi")
+                echo("War Biasa!! Berhasil Menambahkan Transaksi");
+            else
+                echo("heeemmm, yang penting berhasil!!!!");
+        ?>
+        <br />
+        <a href=../index.html>kembali</a>
+    </div>
+</div>
+<?php include "kaki.html";
+?>
