@@ -38,9 +38,9 @@
                         while($data=mysqli_fetch_assoc($query)){
                         ?>
                         <option value="<?php echo($data['id_barang']);?>"><?php echo($data["nama_barang"]);?></option>
+                <?php } ?>
                     </select>
                 </div>
-                <?php } ?>
                 <div class="mb-1 text-center">
                     <input class="btn btn-primary" type="submit" value="buat" />
                     <input class="btn btn-primary" type="reset" value="reset" />

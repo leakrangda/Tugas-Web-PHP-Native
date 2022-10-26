@@ -1,4 +1,5 @@
-<?php
+<?php   
+    session_start();
     $_SESSION['aksi'] = "login";
     include "koneksi.php";
     if(empty($koneksi)){
