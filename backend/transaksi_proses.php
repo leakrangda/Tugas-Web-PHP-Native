@@ -4,8 +4,7 @@
     $no = $_POST['no'];
     $jenis = $_POST['jenis'];
     $barang = $_POST['barang'];
-    session_start();
-    $user = $_SESSION['user'];
+    $user = $_POST['user'];
 
     $query = mysqli_query($koneksi, 
         "insert into transaksi values(default, '$tgl', '$no', '$jenis','$barang', '$user')");

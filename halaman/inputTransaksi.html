@@ -40,6 +40,16 @@
                         <option value="<?php echo($data['id_barang']);?>"><?php echo($data["nama_barang"]);?></option>
                 <?php } ?>
                     </select>
+                    <label class="form-label">Nama user</label>
+                    <select class="form-control" name="user" required>
+                        <?php include "../backend/koneksi.php";
+                        $query = mysqli_query($koneksi, 
+                            "select id_user, nama from user where level_id!=0");
+                        while($data=mysqli_fetch_assoc($query)){
+                        ?>
+                        <option value="<?php echo($data['id_user']);?>"><?php echo($data["nama"]);?></option>
+                <?php } ?>
+                    </select>
                 </div>
                 <div class="mb-1 text-center">
                     <input class="btn btn-primary" type="submit" value="buat" />

@@ -26,7 +26,7 @@
                 </div>
 <?php include "../backend/koneksi.php"; ?>
 <?php if($koneksi){
-                    $statement = "select a.nama as member, b.nama as level, c.diskon, @disbarang:=if((d.harga_unit * count(e.no_transaksi))>100000,10,0) as 'diskon barang', @totbel:=sum(d.harga_unit) as 'total pembelian', @totdis:= @totbel * (@disbarang+c.diskon)/100 as 'total diskon', d.harga_unit * count(e.no_transaksi) - @totdis as 'total transaksi' from transaksi e inner join user a on e.user_id = a.id_user inner join level b on a.level_id = b.id_level inner join diskon c on c.user_id = a.id_user inner join barang d on d.id_barang = e.barang_id";
+                    $statement = "select a.nama as member, b.nama as level, c.diskon, @disbarang:=if((d.harga_unit * count(e.no_transaksi))>100000,10,0) as 'diskon barang', @totbel:=sum(d.harga_unit) as 'total pembelian', @totdis:= @totbel * (@disbarang+c.diskon)/100 as 'total diskon', d.harga_unit * count(e.no_transaksi) - @totdis as 'total transaksi' from transaksi e inner join user a on e.user_id = a.id_user inner join level b on a.level_id = b.id_level inner join diskon c on c.user_id = a.id_user inner join barang d on d.id_barang = e.barang_id group by member";
                     /*$query = mysqli_query($koneksi, 
                     "select a.nama as member, b.nama as level, c.diskon, 
                     @disbarang:= if(sum(d.harga_unit)>100000,10,0) as 'diskon barang', 
