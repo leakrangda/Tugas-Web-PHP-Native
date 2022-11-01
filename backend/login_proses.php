@@ -10,13 +10,13 @@
         //ambil query user
         $user = $_POST["akun"];
         if(!empty($user)){
-            $hasil=mysqli_query($koneksi, "select id_user, password, level from user where nama='$user'");
+            $hasil=mysqli_query($koneksi, "select id_user, password, level_id from user where nama='$user'");
             if(mysqli_num_rows($hasil)){
                 $data = mysqli_fetch_assoc($hasil);
                 if($_POST['pass']==$data["password"]){
                     session_start();
                     $_SESSION['user'] = $data['id_user'];
-                    header("location:../halaman/menu.html?user=$user&level=$data[level]");
+                    header("location:../halaman/menu.html?user=$user&level=$data[level_id]");
                 }
                 else
                     header("location:../halaman/error.html?err=user");
