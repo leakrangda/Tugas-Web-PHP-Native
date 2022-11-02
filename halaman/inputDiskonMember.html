@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Input Diskon Member</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet/css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container-fluid bg-dark text-white p-5">
+            <form method="post" action="../backend/diskonMember_proses.php">
+                <h2>Tambah Diskon Member</h2>
+                <div class="mb-3 mt-3">
+                    <label class="form-label">Nama Member</label>
+                    <select class="form-control" name="level">
+                <?php 
+                include "../backend/koneksi.php";
+                $statement = "select id_level, nama from level";
+                $query = mysqli_query($koneksi, $statement);
+                while($data = mysqli_fetch_assoc($query)){ ?>
+                        <option value="<?php echo($data['id_level']);?>"><?php echo($data['nama'])?></option>
+                <?php } ?>
+                    </select>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label class="form-label">diskon</label>
+                    <input class="form-control" type="number" name="diskon" min=0 max=100 required/>
+                </div>
+                <div class="mb-1 text-center">
+                    <input class="btn btn-primary" type="submit" value="buat" />
+                    <input class="btn btn-primary" type="reset" value="reset" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

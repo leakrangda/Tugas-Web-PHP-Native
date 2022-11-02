@@ -26,19 +26,21 @@
                 </div>
 <?php include "../backend/koneksi.php"; ?>
 <?php if($koneksi){
-                    $statement = "select a.nama as member, b.nama as level, c.diskon, @disbarang:=if((d.harga_unit * count(e.no_transaksi))>100000,10,0) as 'diskon barang', @totbel:=sum(d.harga_unit) as 'total pembelian', @totdis:= @totbel * (@disbarang+c.diskon)/100 as 'total diskon', d.harga_unit * count(e.no_transaksi) - @totdis as 'total transaksi' from transaksi e inner join user a on e.user_id = a.id_user inner join level b on a.level_id = b.id_level inner join diskon c on c.user_id = a.id_user inner join barang d on d.id_barang = e.barang_id group by member";
-                    /*$query = mysqli_query($koneksi, 
-                    "select a.nama as member, b.nama as level, c.diskon, 
-                    @disbarang:= if(sum(d.harga_unit)>100000,10,0) as 'diskon barang', 
-                    @totbel:= sum(d.harga_unit) as 'total pembelian', 
-                    @totdis:= (@totbel * (@disbarang + c.diskon) / 100) as 'total diskon', 
-                    @totbel - @totdis as 'total transaksi' from transaksi e 
-                    inner join user a on e.user_id = a.id_user 
+                    //$statement = "select a.nama as member, b.nama as level, c.diskon, @disbarang:=if((d.harga_unit * count(e.no_transaksi))>100000,10,0) as 'diskon barang', @totbel:=sum(d.harga_unit) as 'total pembelian', @totdis:= @totbel * (@disbarang+c.diskon)/100 as 'total diskon', d.harga_unit * count(e.no_transaksi) - @totdis as 'total transaksi' from transaksi e inner join user a on e.user_id = a.id_user inner join level b on a.level_id = b.id_level inner join diskon c on c.user_id = a.id_user inner join barang d on d.id_barang = e.barang_id group by member";
+                    
+                    $statement = "select a.nama as member, b.nama as level, c.diskon, 
+                    if(sum(d.harga_unit)>100000,10,0) as 'diskon barang', 
+                    sum(d.harga_unit) as 'total pembelian', 
+                    sum(d.harga_unit) * ('diskon barang' + c.diskon) / 100 as 'total diskon', 
+                    sum(d.harga_unit) - sum(d.harga_unit)*('diskon barang'+c.diskon)/100 as 'total transaksi', d.nama_barang as barang from transaksi e 
+                    right join user a on e.user_id = a.id_user 
                     inner join level b on a.level_id = b.id_level 
-                    inner join diskon c on c.user_id = a.id_user 
-                    inner join barang d on d.id_barang = e.barang_id");*/
+                    inner join diskonMember c on c.id_diskon_member= a.diskonMember_id
+                    inner join barang d on d.id_barang = e.barang_id group by member";
+
                     $query = mysqli_query($koneksi, $statement, MYSQLI_USE_RESULT);
                     $counter = 1;
+                    echo(mysqli_error($koneksi));
                     while($data = mysqli_fetch_array($query)){ ?>
                 <div class="row border m-2">
                     <div class="col-1"><?php echo($counter); ?></div>

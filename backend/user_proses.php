@@ -6,7 +6,7 @@
     $level = $_POST['level'];
     if(!$koneksi)
         die("error koneksi");
-    if(mysqli_query($koneksi, "insert into user values('', '$nama', '$pas','$level','$stat')"))
+    if(mysqli_query($koneksi, "insert into user values(default, '$nama', '$pas','$level',null, '$stat')"))
         header("location:../index.html");
     else{
         echo(mysqli_error($koneksi));

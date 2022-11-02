@@ -15,25 +15,24 @@
             <div class="container max-width:50% m-5 ">
                 <div class="row border m-2">
                     <div class="col-2">no</div>
-                    <div class="col-2">nama</div>
                     <div class="col-2">level</div>
                     <div class="col-3">diskon</div>
                     <div class="col-3">kontrol</div>
                 </div>
 <?php include "../backend/koneksi.php"; ?>
 <?php if($koneksi){
-                    $query = mysqli_query($koneksi, "select id_diskon, a.nama, c.nama as level, diskon from diskon b
-                        inner join user a on a.id_user = b.user_id inner join level c on a.level_id = c.id_level");
+                    $statement = "select id_diskon_member, b.nama as level, diskon from diskonMember a inner join level b
+                        on a.level_id=b.id_level";
+                    $query = mysqli_query($koneksi, $statement);
                     $counter = 1;
                     while($data = mysqli_fetch_assoc($query)){ ?>
                 <div class="row border m-2">
                     <div class="col-2"><?php echo($counter); ?></div>
-                    <div class="col-2"><?php echo($data["nama"]); ?></div>
                     <div class="col-2"><?php echo($data["level"]); ?></div>
-                    <div class="col-3"><?php echo($data["diskon"]); ?> persen</div>
+                    <div class="col-3"><?php echo($data["diskon"]); ?> %</div>
                     <div class="col-3">
-                        <a href="../backend/editUser.php?user_id=<?php $data['id_kategori'];?>">Edit</a></td>
-                        <a href="../backend/deleteUser.php?user_id=<?php $data['id_kategori'];?>">delete</a></td>
+                        <a href="../backend/editUser.php?user_id=<?php $data['id_diskon_member'];?>">Edit</a></td>
+                        <a href="../backend/deleteUser.php?user_id=<?php $data['id_diskon_member'];?>">delete</a></td>
                     </div>
                 </div>
 <?php $counter++;}} ?>

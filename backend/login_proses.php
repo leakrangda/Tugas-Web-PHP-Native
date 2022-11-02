@@ -16,6 +16,7 @@
                 if($_POST['pass']==$data["password"]){
                     session_start();
                     $_SESSION['user'] = $data['id_user'];
+                    $_SESSION['level'] = $data['level_id'];
                     header("location:../halaman/menu.html?user=$user&level=$data[level_id]");
                 }
                 else

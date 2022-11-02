@@ -16,7 +16,9 @@
                 echo("heeemmm, yang penting berhasil!!!!");
         ?>
         <br />
-        <a href=../index.html>kembali</a>
+        <?php
+        <a href="../menu.html?user=$_SESSION['user']&level=$_SESSION['level']"">kembali</a>
+        ?>
     </div>
 </div>
 <?php include "kaki.html";
