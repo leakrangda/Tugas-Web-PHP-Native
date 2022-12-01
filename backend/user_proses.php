@@ -1,7 +1,7 @@
 <?php
     include "koneksi.php";
     $nama = $_POST['nama'];
-    $pas = $_POST['pass'];
+    $pas = hash('sha256', $_POST['pass']);
     $stat = $_POST['status'];
     $level = $_POST['level'];
     if(!$koneksi)

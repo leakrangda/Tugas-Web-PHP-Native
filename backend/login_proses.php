@@ -13,9 +13,9 @@
             $hasil=mysqli_query($koneksi, "select id_user, password, level_id from user where nama='$user'");
             if(mysqli_num_rows($hasil)){
                 $data = mysqli_fetch_assoc($hasil);
-                if($_POST['pass']==$data["password"]){
-                    session_start();
-                    $_SESSION['user'] = $data['id_user'];
+                if(hash('sha256', $_POST['pass'])==$data["password"]){
+                    $_SESSION['id'] = $data['id_user'];
+                    $_SESSION['user'] = $user;
                     $_SESSION['level'] = $data['level_id'];
                     header("location:../halaman/menu.html?user=$user&level=$data[level_id]");
                 }
