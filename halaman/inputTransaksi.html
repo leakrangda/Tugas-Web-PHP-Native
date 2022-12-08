@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <?php include "../backend/checkUser.php"; ?>
         <title>input Transaksi</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,6 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
     </head>
     <body>
+        <?php include "nav.html"; ?>
         <div class="container-fluid bg-dark text-white p-5">
             <form method="post" action="../backend/transaksi_proses.php">
                 <h2>Tambah Transaksi</h2>

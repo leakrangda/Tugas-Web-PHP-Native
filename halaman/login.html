@@ -6,6 +6,8 @@
                 <div>
                     <input class="form control" name="akun" placeholder="masukan nama akun" type="text" required>
                     <input class="form control" name="pass" placeholder="masukan password" type="password" required />
+                    <input class="form control" name="ip" type="text" hidden value= <?php echo( getenv('HTTP_CLIENT_IP')?:getenv('HTTP_X_FORWARDED_FOR')?:getenv('HTTP_X_FORWARDED')?:getenv('HTTP_FORWARDED_FOR')?:getenv('HTTP_FORWARDED')?:getenv('REMOTE_ADDR')); ?> />
+                    <input class="form control" name="device" type="text" hidden  value=<?php include "backend/getdev.php"; ?> />
                 </div>
                 <div>
                     <input class="" name="masuk" value="Masuk" type="submit" />

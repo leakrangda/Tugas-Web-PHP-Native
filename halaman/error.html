@@ -1,23 +1,49 @@
 <?php
     include "kepala.html";
 ?>
-<div class="isi">
-    <div class="judul">
-        <h1>Error</h1><?php
-            if($_GET["err"]=="koneksi")
-                echo("koneksi rusak:". $_GET["data"]);
-            else if($_GET["err"]=="user")
-                echo("user tidak ada");
-            else if($_GET["err"]=="intr")
-                echo("akses tidak diperbolehkan");
-            else if($_GET["err"]=="noLog")
-                echo("belum login, login terlebih dahulu");
-            else
-                echo("error tidak jelas");
-        ?>
-        <br />
-        <a href=../index.html>kembali</a>
+<body>
+    <div class="container-fluid">
+        <div class="container text-center">
+            <h1>Error</h1><?php
+                if($_GET["err"]=="koneksi")
+                    echo("koneksi rusak:". $_GET["data"]);
+                else if($_GET["err"]=="user"){
+                    session_start();
+                    echo("user:$_GET[nama]");
+                    echo("<br />");
+                    echo("user tidak ada");
+                }
+                else if($_GET["err"]=="intr")
+                    echo("akses tidak diperbolehkan");
+                else if($_GET["err"]=="noLog")
+                    echo("belum login, login terlebih dahulu");
+                else if($_GET["err"]=="lainya")
+                    echo("error internal, hubungi admin");
+                else if($_GET["err"]=="password")
+                    echo("salah password");
+                else if($_GET["err"]=="double"){
+                    session_start();
+                    echo("double login, maaf sudah akses tidak diberikan");
+                    echo("sebelumnya anda sudah login pada:");
+                    include "../backend/koneksi.php";
+                    $resultset = mysqli_query($koneksi, "select timestamp, device, ip_v4 from user where id_user=$_SESSION[id]");
+                    $hasil=mysqli_fetch_row($resultset);
+                ?>  <table class="table">
+                        <tr>
+                            <th>waktu</th>
+                            <th>alat</th>
+                            <th>ip</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo($hasil[0]); ?></td>
+                            <td><?php echo($hasil[1]); ?></td>
+                            <td><?php echo($hasil[2]); ?></td>
+                        </tr>
+                    </table>
+                <?php }?>
+            <br />
+            <a href=../index.html>kembali</a>
+        </div>
     </div>
-</div>
-<?php include "kaki.html";
-?>
+</body>
+<?php include "kaki.html";?>
