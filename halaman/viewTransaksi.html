@@ -8,34 +8,57 @@
         <link rel="stylesheet" href="../styling/css/pemrograman3.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
     </head>
-    <body class="vertical">
+    <body>
         <?php include "nav.html"; ?>
-        <div class="container-fluid bg-dark text-white text-center vertical">
+        <div class="container-fluid bg-dark text-white text-center">
             <div class="container">
                 <h2>View Transaksi</h2>
             </div>
-            <div class="container max-width:70% m-5 ">
+            <div>
+                <form class="form-group" method ="post" action="<?php echo($_SERVER['PHP_SELF']);?>">
+                    <div class="form-group">
+                        <label for="dari">dari</label>
+                        <input class="form-control" type="date" placeholder="" name="dari"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="sampai">sampai</label>
+                        <input class="form-control" type="date" placeholder="" name="sampai"/>
+                    </div>
+                    <div>
+                        <input type="text" value="transaksi" name="table" hidden />
+                        <input type="text" value="<?php echo($_SERVER['REQUEST_METHOD']==='GET' ? $_GET['user']:$_POST['user']); ?>" name="user" hidden />
+                    </div>
+                    <input class="form-control" type="submit" value="search" />
+                </form> 
+            </div>
+            <div class="container-fluid max-width:50%" >
                 <div class="row border">
                     <div class="col-1">no</div>
-                    <div class="col-2">tgl</div>
-                    <div class="col-1">no</div>
+                    <div class="col-1">tgl</div>
+                    <div class="col-2">no_trans</div>
                     <div class="col-2">jenis</div>
                     <div class="col-2">barang</div>
-                    <div class="col-2">jenis barang</div>
+                    <div class="col-2">konsumen</div>
                     <div class="col-2">kontrol</div>
                 </div>
 <?php include "../backend/koneksi.php"; ?>
 <?php if($koneksi){
-                    $query = mysqli_query($koneksi,
+                    $resultset='';
+                    if($_SERVER["REQUEST_METHOD"]==="POST"){
+                        include "../backend/cari.php";
+                    }else{
+                    $resultset= mysqli_query($koneksi,
                         "select id_transaksi, no_transaksi, tgl_transaksi, jenis_transaksi, 
                         nama_barang, nama from transaksi a inner join barang b on a.barang_id = b.id_barang 
                         inner join user c on a.user_id = c.id_user");
+                    }
                     $counter = 1;
-                    while($data = mysqli_fetch_assoc($query)){ ?>
+                    if($resultset){
+                        while($data = mysqli_fetch_assoc($resultset)){ ?>
                 <div class="row border max-width 70%">
                     <div class="col-1"><?php echo($counter); ?></div>
-                    <div class="col-2"><?php echo($data["tgl_transaksi"]); ?></div>
-                    <div class="col-1"><?php echo($data["no_transaksi"]); ?></div>
+                    <div class="col-1"><?php echo($data["tgl_transaksi"]); ?></div>
+                    <div class="col-2"><?php echo($data["no_transaksi"]); ?></div>
                     <div class="col-2"><?php echo($data["jenis_transaksi"]); ?></div>
                     <div class="col-2"><?php echo($data["nama_barang"]); ?></div>
                     <div class="col-2"><?php echo($data["nama"]); ?></div>
@@ -44,7 +67,7 @@
                         <a href="../backend/deleteUser.php?user_id=<?php $data['id_user'];?>">delete</a></td>
                     </div>
                 </div>
-<?php $counter++;}} ?>
+<?php $counter++;}}} ?>
             </div>
         </div>
     </body>

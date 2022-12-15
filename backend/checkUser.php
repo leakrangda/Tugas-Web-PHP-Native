@@ -7,9 +7,19 @@
         //echo("$user");
     else{
         //ada yang login, tapi check dulu usernya siapa
-        if($_GET['user'] != $_SESSION['user']){
+        if($_SERVER["REQUEST_METHOD"]==="GET"){
+            if($_GET['user'] != $_SESSION['user']){
             //keluar jika bukan user yang benar
-            header("location:../halaman/error.html?err=intr");
+                //header("location:../halaman/error.html?err=intr");
+                echo("post dipanggil");
+            }
+        }
+        else{
+            if($_POST['user'] != $_SESSION['user']){
+            //keluar jika bukan user yang benar
+                //header("location:../halaman/error.html?err=intr");
+                echo("post dipanggil");
+            }
         }
     }
 ?>
